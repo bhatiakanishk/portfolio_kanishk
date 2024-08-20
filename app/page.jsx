@@ -15,7 +15,7 @@ const Home = () => {
               Hey,I am <br/> <span className="text-accent">Kanishk Bhatia</span>
             </h1>
             <p className="max-w-[500px] mb-9 text-white/80">
-              I design and develop experiences that make peoples lives simple.
+              I design and develop experiences that make people&apos;s lives simple.
             </p>
             <div className="flex flex-col xl:flex-row items-center gap-8">
               <a href="/assets/Kanishk Bhatia.pdf" download>
