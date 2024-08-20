@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { FaArrowUp } from "react-icons/fa";
 
 const Photo = () => {
     const [isHoveredOrTapped, setIsHoveredOrTapped] = useState(false);
@@ -27,13 +28,16 @@ const Photo = () => {
         };
     }, [isHoveredOrTapped, audio]);
 
+    const handleTouch = () => {
+        setIsHoveredOrTapped(prevState => !prevState);
+    };
+
     return (
         <div 
-            className="w-full h-full flex justify-center items-center relative xl:ml-10"
+            className="w-full h-full flex flex-col justify-center items-center relative xl:ml-10"
             onMouseEnter={() => setIsHoveredOrTapped(true)}
             onMouseLeave={() => setIsHoveredOrTapped(false)}
-            onTouchStart={() => setIsHoveredOrTapped(true)}
-            onTouchEnd={() => setIsHoveredOrTapped(false)}
+            onTouchStart={handleTouch}
         >
             <motion.div 
                 initial={{ opacity: 0 }} 
@@ -93,6 +97,10 @@ const Photo = () => {
                     </motion.div>
                 </motion.div>
             </motion.div>
+            <div className="mt-4 flex items-center space-x-2 text-gray-600">
+                <FaArrowUp />
+                <span>Try here</span>
+            </div>
         </div>
     );
 }
