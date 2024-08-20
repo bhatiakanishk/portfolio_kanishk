@@ -1,11 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
 const Photo = () => {
     const [isHovered, setIsHovered] = useState(false);
+    const [audio] = useState(typeof Audio !== "undefined" && new Audio("/assets/PEDRO.mp3"));
+
+    useEffect(() => {
+        if (audio) {
+            audio.loop = true; // Enable looping for the audio
+            if (isHovered) {
+                audio.play();
+            } else {
+                audio.pause();
+                audio.currentTime = 0; // Reset the audio to the start
+            }
+        }
+
+        return () => {
+            if (audio) {
+                audio.pause();
+                audio.currentTime = 0;
+            }
+        };
+    }, [isHovered, audio]);
 
     return (
         <div className="w-full h-full flex justify-center items-center relative xl:ml-10">
