@@ -5,13 +5,13 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const Photo = () => {
-    const [isHovered, setIsHovered] = useState(false);
+    const [isHoveredOrTapped, setIsHoveredOrTapped] = useState(false);
     const [audio] = useState(typeof Audio !== "undefined" && new Audio("/assets/PEDRO.mp3"));
 
     useEffect(() => {
         if (audio) {
             audio.loop = true; // Enable looping for the audio
-            if (isHovered) {
+            if (isHoveredOrTapped) {
                 audio.play();
             } else {
                 audio.pause();
@@ -25,15 +25,19 @@ const Photo = () => {
                 audio.currentTime = 0;
             }
         };
-    }, [isHovered, audio]);
+    }, [isHoveredOrTapped, audio]);
 
     return (
-        <div className="w-full h-full flex justify-center items-center relative xl:ml-10">
+        <div 
+            className="w-full h-full flex justify-center items-center relative xl:ml-10"
+            onMouseEnter={() => setIsHoveredOrTapped(true)}
+            onMouseLeave={() => setIsHoveredOrTapped(false)}
+            onTouchStart={() => setIsHoveredOrTapped(true)}
+            onTouchEnd={() => setIsHoveredOrTapped(false)}
+        >
             <motion.div 
                 initial={{ opacity: 0 }} 
                 animate={{ opacity: 1, transition: { delay: 2, duration: 0.4, ease: 'easeIn' }}}
-                onHoverStart={() => setIsHovered(true)}
-                onHoverEnd={() => setIsHovered(false)}
                 className="relative"
             >
                 <motion.svg 
@@ -69,11 +73,11 @@ const Photo = () => {
                 >
                     <motion.div
                         animate={{
-                            rotate: isHovered ? [0, 360] : 0
+                            rotate: isHoveredOrTapped ? [0, 360] : 0
                         }}
                         transition={{
-                            duration: isHovered ? 5 : 0, // Control the speed and stop immediately when not hovered
-                            repeat: isHovered ? Infinity : 0,
+                            duration: isHoveredOrTapped ? 5 : 0, // Control the speed and stop immediately when not hovered or tapped
+                            repeat: isHoveredOrTapped ? Infinity : 0,
                             ease: 'linear'
                         }}
                         className="w-full h-full"
