@@ -13,6 +13,7 @@ const Photo = () => {
         if (typeof Audio !== "undefined") {
             const newAudio = new Audio("/assets/PEDRO.mp3");
             newAudio.loop = true; // Enable looping for the audio
+            newAudio.preload = "auto"; // Preload the audio
             setAudio(newAudio);
         }
     }, []);
@@ -37,16 +38,21 @@ const Photo = () => {
         };
     }, [isHoveredOrTapped, audio]);
 
-    const handleTouch = () => {
-        setIsHoveredOrTapped(prevState => !prevState);
+    const handleInteraction = () => {
+        if (!isHoveredOrTapped && audio) {
+            audio.play().catch((error) => {
+                console.error("Audio play failed:", error);
+            });
+        }
+        setIsHoveredOrTapped((prevState) => !prevState);
     };
 
     return (
         <div 
             className="w-full h-full flex flex-col justify-center items-center relative xl:ml-10"
-            onMouseEnter={() => setIsHoveredOrTapped(true)}
-            onMouseLeave={() => setIsHoveredOrTapped(false)}
-            onTouchStart={handleTouch}
+            onMouseEnter={handleInteraction}
+            onMouseLeave={handleInteraction}
+            onTouchStart={handleInteraction}
         >
             <motion.div 
                 initial={{ opacity: 0 }} 
