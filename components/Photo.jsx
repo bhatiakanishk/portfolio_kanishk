@@ -7,13 +7,22 @@ import { FaArrowUp } from "react-icons/fa";
 
 const Photo = () => {
     const [isHoveredOrTapped, setIsHoveredOrTapped] = useState(false);
-    const [audio] = useState(typeof Audio !== "undefined" && new Audio("/assets/PEDRO.mp3"));
+    const [audio, setAudio] = useState(null);
+
+    useEffect(() => {
+        if (typeof Audio !== "undefined") {
+            const newAudio = new Audio("/assets/PEDRO.mp3");
+            newAudio.loop = true; // Enable looping for the audio
+            setAudio(newAudio);
+        }
+    }, []);
 
     useEffect(() => {
         if (audio) {
-            audio.loop = true; // Enable looping for the audio
             if (isHoveredOrTapped) {
-                audio.play();
+                audio.play().catch((error) => {
+                    console.error("Audio play failed:", error);
+                });
             } else {
                 audio.pause();
                 audio.currentTime = 0; // Reset the audio to the start
@@ -99,7 +108,7 @@ const Photo = () => {
             </motion.div>
             <div className="mt-4 flex items-center space-x-2 text-gray-600">
                 <FaArrowUp />
-                <span>Try here</span>
+                <span>Try tapping the image</span>
             </div>
         </div>
     );
