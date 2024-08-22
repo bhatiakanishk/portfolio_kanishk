@@ -6,7 +6,7 @@ import Image from "next/image";
 import { FaArrowUp } from "react-icons/fa";
 
 const Photo = () => {
-    const [isHoveredOrTapped, setIsHoveredOrTapped] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
     const [audio, setAudio] = useState(null);
 
     useEffect(() => {
@@ -20,7 +20,7 @@ const Photo = () => {
 
     useEffect(() => {
         if (audio) {
-            if (isHoveredOrTapped) {
+            if (isHovered) {
                 audio.play().catch((error) => {
                     console.error("Audio play failed:", error);
                 });
@@ -36,23 +36,26 @@ const Photo = () => {
                 audio.currentTime = 0;
             }
         };
-    }, [isHoveredOrTapped, audio]);
+    }, [isHovered, audio]);
 
-    const handleInteraction = () => {
-        if (!isHoveredOrTapped && audio) {
-            audio.play().catch((error) => {
-                console.error("Audio play failed:", error);
-            });
-        }
-        setIsHoveredOrTapped((prevState) => !prevState);
+    const handleMouseEnter = () => {
+        setIsHovered(true);
+    };
+
+    const handleMouseLeave = () => {
+        setIsHovered(false);
+    };
+
+    const handleTouchStart = () => {
+        setIsHovered((prevState) => !prevState);
     };
 
     return (
         <div 
             className="w-full h-full flex flex-col justify-center items-center relative xl:ml-10"
-            onMouseEnter={handleInteraction}
-            onMouseLeave={handleInteraction}
-            onTouchStart={handleInteraction}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            onTouchStart={handleTouchStart}
         >
             <motion.div 
                 initial={{ opacity: 0 }} 
@@ -92,11 +95,11 @@ const Photo = () => {
                 >
                     <motion.div
                         animate={{
-                            rotate: isHoveredOrTapped ? [0, 360] : 0
+                            rotate: isHovered ? [0, 360] : 0
                         }}
                         transition={{
-                            duration: isHoveredOrTapped ? 5 : 0, // Control the speed and stop immediately when not hovered or tapped
-                            repeat: isHoveredOrTapped ? Infinity : 0,
+                            duration: isHovered ? 5 : 0, // Control the speed and stop immediately when not hovered
+                            repeat: isHovered ? Infinity : 0,
                             ease: 'linear'
                         }}
                         className="w-full h-full"
