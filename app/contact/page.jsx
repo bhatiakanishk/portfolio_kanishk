@@ -29,16 +29,39 @@ const info = [
 const Contact = () => {
     const [alertVisible, setAlertVisible] = useState(false);
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        setAlertVisible(true);
-        setTimeout(() => {
-            setAlertVisible(false);
-        }, 3000); // Hide the alert after 3 seconds
+
+        const data = {
+            firstName: event.target[0].value,
+            lastName: event.target[1].value,
+            email: event.target[2].value,
+            message: event.target[3].value,
+        };
+
+        try {
+            const response = await fetch('https://<project-id>.cloudfunctions.net/sendContactForm', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+            if (response.ok) {
+                setAlertVisible(true);
+                setTimeout(() => {
+                    setAlertVisible(false);
+                }, 3000);
+            } else {
+                console.error('Failed to send message');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
     };
 
     return (
-        <motion.div 
+        <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { delay: 2.4, duration: 0.4, ease: "easeIn" } }}
             className="py-6"
