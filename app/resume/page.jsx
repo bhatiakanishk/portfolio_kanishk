@@ -40,13 +40,13 @@ const experience = {
     description: "Professional Experience in the tech world",
     items: [
         {
-            company: "WorkOrderWizard",
-            position: "Founding Software Engineer",
+            company: "WorkOrderWizard LLC.",
+            position: "Founding Engineer",
             duration: "Oct 2023 - Present",
         },
         {
-            company: "Ultimate Computech Pvt Ltd",
-            position: "Software Engineer",
+            company: "Ultimate Computech Pvt Ltd.",
+            position: "Full-Stack Engineer",
             duration: "Apr 2020 - Jul 2021",
         }
     ]
