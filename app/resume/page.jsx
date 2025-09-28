@@ -1,8 +1,8 @@
 "use client";
 
 import React from 'react';
-import { FaHtml5, FaCss3, FaJs, FaReact, FaNodeJs, FaPython, FaSwift, FaJava, FaUikit, FaAngular, FaSass, FaLinux, FaUbuntu, FaApple, FaJira, FaWindows } from "react-icons/fa";
-import { SiTailwindcss, SiNextdotjs, SiTypescript, SiJquery, SiMysql, SiPostgresql, SiFirebase, SiMongodb, SiSanity, SiAmazon, SiGooglecloud, SiGit, SiGitlab, SiTerraform, SiPacker, SiKubernetes, SiDocker, SiAnsible, SiJenkins, SiGraphql, SiPostman, SiJson, SiYaml, SiXcode, SiCplusplus, SiGnubash } from "react-icons/si";
+import { FaHtml5, FaCss3, FaJs, FaReact, FaNodeJs, FaPython, FaSwift, FaJava, FaUikit, FaAngular, FaSass, FaLinux, FaUbuntu, FaApple, FaJira, FaWindows, FaRobot } from "react-icons/fa";
+import { SiTailwindcss, SiNextdotjs, SiTypescript, SiMysql, SiPostgresql, SiFirebase, SiMongodb, SiSanity, SiAmazon, SiGooglecloud, SiGit, SiGitlab, SiTerraform, SiPacker, SiKubernetes, SiDocker, SiAnsible, SiJenkins, SiGraphql, SiPostman, SiJson, SiYaml, SiXcode, SiGnubash, SiOpenai, SiExpo } from "react-icons/si";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -29,7 +29,7 @@ const about = {
         },
         {
             fieldName: "Experience",
-            fieldValue: "2+ Years"
+            fieldValue: "3+ Years"
         },
     ]
 };
@@ -40,13 +40,18 @@ const experience = {
     description: "Professional Experience in the tech world",
     items: [
         {
-            company: "WorkOrderWizard LLC.",
+            company: "Akoya LLC",
+            position: "Full Stack Engineer",
+            duration: "Jun 2025 - Sep 2025",
+        },
+        {
+            company: "WorkOrderWizard LLC",
             position: "Founding Engineer",
-            duration: "Oct 2023 - Present",
+            duration: "Oct 2023 - Jun 2025",
         },
         {
             company: "Ultimate Computech Pvt Ltd.",
-            position: "Full-Stack Engineer",
+            position: "Full Stack Engineer",
             duration: "Apr 2020 - Jul 2021",
         }
     ]
@@ -73,6 +78,10 @@ const skills = {
     title: "Skills",
     description: "Learning new skills everyday",
     skillList: [
+        {
+            icon: <FaPython />,
+            name: "Python 3",
+        },
         {
             icon: <FaSwift />,
             name: "swift",
@@ -106,36 +115,24 @@ const skills = {
             name: "Node.js",
         },
         {
-            icon: <FaPython />,
-            name: "Python 3",
+            icon: <SiOpenai />,
+            name: "OpenAI",
         },
         {
             icon: <FaJava />,
             name: "Java",
         },
         {
-            icon: <FaUikit />,
-            name: "UIKit",
-        },
-        {
             icon: <SiTypescript />,
             name: "TypeScript",
-        },
-        {
-            icon: <SiCplusplus />,
-            name: "C++",
         },
         {
             icon: <FaAngular />,
             name: "Angular",
         },
         {
-            icon: <FaSass />,
-            name: "Sass",
-        },
-        {
-            icon: <SiJquery />,
-            name: "jQuery",
+            icon: <SiExpo />,
+            name: "Expo Go",
         },
         {
             icon: <SiXcode />,
@@ -195,7 +192,7 @@ const skills = {
         },
         {
             icon: <SiDocker />,
-            name: "Doscker",
+            name: "Docker",
         },
         {
             icon: <SiAnsible />,

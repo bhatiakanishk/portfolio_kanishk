@@ -26,21 +26,30 @@ const info = [
     },
 ];
 
+const CONTACT_FORM_ENDPOINT = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT;
+
 const Contact = () => {
     const [alertVisible, setAlertVisible] = useState(false);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        if (!CONTACT_FORM_ENDPOINT) {
+            console.error('Contact form endpoint is not configured. Set NEXT_PUBLIC_CONTACT_ENDPOINT.');
+            return;
+        }
+
+        const formData = new FormData(event.currentTarget);
+
         const data = {
-            firstName: event.target[0].value,
-            lastName: event.target[1].value,
-            email: event.target[2].value,
-            message: event.target[3].value,
+            firstName: formData.get('firstName'),
+            lastName: formData.get('lastName'),
+            email: formData.get('email'),
+            message: formData.get('message'),
         };
 
         try {
-            const response = await fetch('https://<project-id>.cloudfunctions.net/sendContactForm', {
+            const response = await fetch(CONTACT_FORM_ENDPOINT, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -52,6 +61,7 @@ const Contact = () => {
                 setTimeout(() => {
                     setAlertVisible(false);
                 }, 3000);
+                event.currentTarget.reset();
             } else {
                 console.error('Failed to send message');
             }
@@ -75,11 +85,11 @@ const Contact = () => {
                                 Drop a message and let&apos;s have a chat!
                             </p>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <Input type="text" placeholder="First Name" required />
-                                <Input type="text" placeholder="Last Name" required />
-                                <Input type="email" placeholder="Email" required />
+                                <Input type="text" placeholder="First Name" name="firstName" required />
+                                <Input type="text" placeholder="Last Name" name="lastName" required />
+                                <Input type="email" placeholder="Email" name="email" required />
                             </div>
-                            <Textarea className="h-[200px]" placeholder="Type your message here." required />
+                            <Textarea className="h-[200px]" placeholder="Type your message here." name="message" required />
                             <Button type="submit" size="md" className="max-w-40">
                                 Send message
                             </Button>

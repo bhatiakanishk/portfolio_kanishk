@@ -26,7 +26,7 @@ const projects = [
         category: 'React',
         title: 'Expense Tracker',
         description: 'Built an Expense Tracker app using React and MongoDB Cloud, achieving a 90% reduction in security breaches with JWT and OAuth authentication. Deployed a scalable database handling over 1 million records and optimized the user experience with React and Redux for 2-second load times.',
-        stack: [{name: "React"}, {name: "MongoDB"}, {name: "HTML 5"}, {name: "Saas"}, {name: "JavaScript"}],
+        stack: [{name: "React"}, {name: "MongoDB"}, {name: "HTML 5"}, {name: "Sass"}, {name: "JavaScript"}],
         image: '/assets/money.png',
         live: "",
         github: "https://github.com/bhatiakanishk/Expense-Tracker",
@@ -89,7 +89,7 @@ const Work = () => {
                                 </h2>
                                 <p className="text-white/80 text-[30px]">{project.title}</p>
                                 <p className="text-white/60">{project.description}</p>
-                                <ul className="flex-gap-4">
+                                <ul className="flex gap-4 flex-wrap">
                                     {project.stack.map((item, index) => {
                                         return (
                                             <li key={index} className="text-xl text-accent">

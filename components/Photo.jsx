@@ -107,9 +107,9 @@ const Photo = () => {
                         <Image
                             src="/assets/photo.png"
                             priority
-                            quality
+                            quality={90}
                             fill
-                            alt=""
+                            alt="Portrait of Kanishk Bhatia"
                             className="object-cover"
                         />
                     </motion.div>
